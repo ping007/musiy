@@ -1,0 +1,158 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+//$body-font-family: 'Teko';
+//@import '~vuetify/src/styles/styles.sass';
+
+/** color palette */
+.msy-color-red {
+  background: rgb(231, 64, 89);
+  background: linear-gradient(
+    135deg,
+    rgba(231, 64, 89, 1) 0%,
+    rgba(189, 100, 153, 1) 100%
+  );
+}
+.msy-color-red.v-btn--disabled {
+background: rgb(231, 64, 89,0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(231, 64, 89, 0.3) 0%,
+    rgba(189, 100, 153, 0.3) 100%
+  );
+}
+
+.msy-color-light-gray {
+  background-color: #dddddd;
+}
+
+.msy-color-gray {
+  background-color: #ededed;
+}
+
+.msy-color-dark-gray {
+  background-color: #757575;
+}
+
+.msy-color-blue-gray {
+  background-color: #9fadaa;
+}
+
+.msy-color-black {
+  background-color: #2d2d2d;
+}
+
+.msy-color-white {
+  background-color: #ffffff;
+}
+
+.msy-color-text-red {
+  color: rgb(231, 64, 89) !important;
+}
+
+.msy-color-text-light-gray {
+  color: #dddddd;
+}
+
+.msy-color-text-gray {
+  color: #ededed !important;
+}
+
+.msy-color-text-dark-gray {
+  color: #757575;
+}
+
+.msy-color-text-blue-gray {
+  color: #9fadaa !important;
+}
+
+.msy-color-text-black {
+  color: #2d2d2d !important;
+}
+
+.msy-color-text-white {
+  color: #ffffff !important;
+}
+
+.v-input--dense > .v-input__control > .v-input__slot {
+  background-color: #ededed !important;
+}
+
+.v-input__icon i {
+  color: rgb(231, 64, 89) !important;
+  caret-color: rgb(231, 64, 89) !important;
+}
+
+.default-font-size {
+  font-size: 1rem !important;
+}
+
+.default-font-family {
+  font-family: "Hiragino Kaku Gothic Pro", HiraKakuProN-W6, Meiryo, Roboto !important;
+}
+
+.default-font,
+.v-subheader {
+  color: #3e4443 !important;
+  font-family: "Hiragino Kaku Gothic Pro", HiraKakuProN-W6, Meiryo, Roboto !important;
+}
+
+body,
+button,
+input {
+  font-family: "Hiragino Kaku Gothic Pro", HiraKakuProN-W3, Meiryo, Roboto !important;
+}
+
+.block-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.most-right-on-screen {
+  margin:0 0 0 auto;
+}
+
+.block-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.block-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.bold{
+  font-weight: bold !important;
+}
+/* fans/purchase */
+.donation-point input {
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+.donation-point .v-text-field__suffix {
+  font-weight: 600 !important;
+  font-size: 1.3rem !important;
+}
+
+.donation-point .v-input__slot::before {
+  border-color: red !important;
+}
+
+/* EvaluationActions */
+.evaluation-comment-textarea label {
+  top: initial !important;
+}
+
+.evaluation-comment-textarea textarea {
+  margin-bottom: 10px !important;
+}
+
+.evaluation-comment-textarea .v-text-field__details {
+  display: none;
+}

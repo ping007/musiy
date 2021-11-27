@@ -1,0 +1,9 @@
+{
+  "accessToken": "",
+  "archive": {
+    "enable": false,
+    "gcs": {
+      "bucketUri": ""
+    }
+  }
+}

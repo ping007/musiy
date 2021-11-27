@@ -1,0 +1,2 @@
+#!/bin/bash
+mkcert localhost 127.0.0.1 `networksetup -getinfo Wi-Fi | grep '^IP address:' | awk '{ print $3 }'`

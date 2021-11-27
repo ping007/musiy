@@ -1,0 +1,44 @@
+{
+  "name": "functions",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.10.0",
+    "@types/encoding-japanese": "^1.0.17",
+    "@types/nodemailer": "^6.4.0",
+    "agora-access-token": "^2.0.4",
+    "axios": "^0.21.1",
+    "cloudinary": "^1.23.0",
+    "cors": "^2.8.5",
+    "encoding-japanese": "^1.0.30",
+    "firebase-admin": "^9.4.2",
+    "firebase-functions": "^3.14.1",
+    "handlebars": "^4.7.7",
+    "iconv-lite": "^0.6.2",
+    "json2csv": "^5.0.1",
+    "log4js": "^6.3.0",
+    "moment": "^2.27.0",
+    "nodemailer": "^6.4.17",
+    "pg": "^8.5.1",
+    "stripe": "^8.132.0",
+    "tsv": "^0.2.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.1.6",
+    "tslint": "^5.12.0",
+    "typescript": "^3.9.7"
+  },
+  "private": true
+}
