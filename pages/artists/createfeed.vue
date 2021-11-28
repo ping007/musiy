@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="artists-createfeed" :fluid="true">
+    <v-container class="artists-createfeed" fluid>
       <v-form ref="form">
         <v-row class="mx-1 mb-5">
           <span

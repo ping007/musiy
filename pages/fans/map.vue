@@ -1,5 +1,5 @@
 <template>
-  <v-container :fluid="true">
+  <v-container fluid>
     <v-row class="mx-1 py-5 title">
       <span v-text="'現在位置の近くのライブ情報'"></span>
     </v-row>

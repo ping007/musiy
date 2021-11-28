@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loading v-model="loadingValue" />
-    <v-container :fluid="true">
+    <v-container fluid>
       <v-form ref="form">
         <v-row class="py-5 px-2" align="center" justify="center">
           <div>

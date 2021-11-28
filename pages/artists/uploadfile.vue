@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="artists-uploadfile" :fluid="true">
+    <v-container class="artists-uploadfile" fluid>
       <v-row class="mx-1 mb-5">
         <span class="title" v-text="'ファイルアップロード'"></span>
       </v-row>

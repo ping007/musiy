@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mymovies" :fluid="true">
+  <v-container class="mymovies" fluid>
     <v-tabs color="rgb(231, 64, 89)" fixed-tabs>
       <v-tab :key="'mymovie'" :href="`#tab-mymovie`">
         <span class="tab-title" v-text="'購入済み'"></span>

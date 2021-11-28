@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container v-if="isLoaded" class="fans-main" :fluid="true">
+    <v-container v-if="isLoaded" class="fans-main" fluid>
       <div v-if="!isShowAll">
         <v-tabs
           color="rgb(231, 64, 89)"

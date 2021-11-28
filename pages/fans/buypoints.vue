@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fans-buypoints" :fluid="true">
+  <v-container class="fans-buypoints" fluid>
     <v-row class="mx-1">
       <span
         class="title"

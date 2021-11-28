@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container :fluid="true">
+    <v-container fluid>
       <v-form ref="form">
         <v-row class="mx-2">
           <v-text-field

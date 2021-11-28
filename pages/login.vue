@@ -1,7 +1,7 @@
 <template>
   <div class="login-form">
     <Loading v-model="loadingValue" zindex="100" />
-    <v-container :fluid="true">
+    <v-container fluid>
       <v-row align="center" justify="center" class="logo">
         <v-img src="/images/logo_icon.png" max-width="180" />
       </v-row>

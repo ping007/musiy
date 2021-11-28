@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loading v-model="loadingValue" />
-    <v-container class="artists-createticket" :fluid="true">
+    <v-container class="artists-createticket" fluid>
       <v-form v-if="broadcast" ref="form">
         <v-row class="mx-1 mb-5">
           <span

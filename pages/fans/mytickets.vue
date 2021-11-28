@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="mytickets" :fluid="true">
+    <v-container class="mytickets" fluid>
       <v-tabs color="rgb(231, 64, 89)" fixed-tabs>
         <v-tab :key="'mytickets'" :href="`#tab-mytickets`">
           <span class="tab-title" v-text="'購入済み'"></span>

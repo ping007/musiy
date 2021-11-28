@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loading v-model="loadingValue" />
-    <v-container class="change-purchase-info" :fluid="true">
+    <v-container class="change-purchase-info" fluid>
       <div v-if="cardNumFourDigits" class="card-num ml-2">
         <span
           v-text="'現在登録中のカード番号（下4桁）' + cardNumFourDigits"

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loading v-model="loadingValue" />
-    <v-container :fluid="true">
+    <v-container fluid>
       <v-row class="pt-5 pb-10 logo" align="center" justify="center">
         <v-img src="/images/logo_icon.png" max-width="180" />
       </v-row>
