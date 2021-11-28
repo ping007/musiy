@@ -56,7 +56,8 @@ export default {
     "~/plugins/persistedstate",
     "~/plugins/screenfull",
     "~/plugins/socialsharing",
-    "~/plugins/vueinview"
+    "~/plugins/vueinview",
+    "~/plugins/device-detector"
   ],
   /*
    ** Nuxt.js dev-modules

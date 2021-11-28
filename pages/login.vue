@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <Loading v-model="loadingValue" zindex="100"/>
+  <div class="login-form">
+    <Loading v-model="loadingValue" zindex="100" />
     <v-container :fluid="true">
       <v-row align="center" justify="center" class="logo">
         <v-img src="/images/logo_icon.png" max-width="180" />
       </v-row>
       <v-form ref="form">
         <v-row>
-          <v-col class="pb-0 px-6">
+          <v-col class="pb-0 px-6 py-xs-0 py-sm-0">
             <v-text-field
               v-model="email"
               type="email"
@@ -22,9 +22,10 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col class="px-6">
+          <v-col class="px-6 py-xs-0 py-sm-0">
             <v-text-field
               v-model="password"
+              class="pb-0"
               :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
               :type="passwordShow ? 'text' : 'password'"
               :rules="[rules.required, rules.minLengthPassword]"
@@ -39,51 +40,57 @@
             />
           </v-col>
         </v-row>
+        <v-row>
+          <v-col class="text-center px-6 py-0">
+            <v-btn
+              block
+              x-large
+              depressed
+              dark
+              rounded
+              class="msy-color-red"
+              @click="login"
+              v-text="'ログイン'"
+            />
+          </v-col>
+        </v-row>
       </v-form>
 
-      <v-row>
-        <v-col class="text-center px-6">
+      <v-row class="text-center">
+        <v-col class="px-6">
           <v-btn
             block
-            x-large
-            depressed
-            dark
-            rounded
-            class="msy-color-red"
-            @click="login"
-            v-text="'ログイン'"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col class="text-center px-6">
-          <v-btn
-            block
-            class="color-facebook text-capitalize mb-3"
+            :x-large="isMobileDevice"
+            :depressed="isMobileDevice"
+            :dark="isMobileDevice"
+            :rounded="isMobileDevice"
+            class="color-facebook"
             @click="socialLogin('facebook')"
           >
-            <v-icon left class="color-facebook__icon" size="22">
+            <v-icon>
               mdi-facebook
             </v-icon>
-            Facebookアカウントでログイン
+            <span class="d-none ml-1" :class="!isMobileDevice && 'd-block'">Facebookアカウントでログイン</span>
           </v-btn>
         </v-col>
-      </v-row>
-      <v-row>
-        <v-col class="text-center px-6">
+        <v-col class="px-6">
           <v-btn
             block
-            class="color-twitter text-capitalize mb-3"
+            :x-large="isMobileDevice"
+            :depressed="isMobileDevice"
+            :dark="isMobileDevice"
+            :rounded="isMobileDevice"
+            class="color-twitter"
             @click="socialLogin('twitter')"
           >
-            <v-icon left class="color-twitter__icon" size="22">
+            <v-icon>
               mdi-twitter
             </v-icon>
-            Twitterアカウントでログイン
+            <span class="d-none ml-1" :class="!isMobileDevice && 'd-block'">Twitterアカウントでログイン</span>
           </v-btn>
         </v-col>
       </v-row>
-      <v-row class="mt-2 py-5" :align="'center'" :justify="'center'">
+      <v-row :align="'center'" :justify="'center'">
         <v-btn
           text
           class="msy-color-text-blue-gray default-font"
@@ -92,7 +99,7 @@
         />
       </v-row>
 
-      <v-row class="pt-2 pb-5" :align="'center'" :justify="'center'">
+      <v-row :align="'center'" :justify="'center'">
         <v-btn
           text
           to="/register"
@@ -100,7 +107,7 @@
           v-text="'新規会員登録'"
         />
       </v-row>
-      <v-row class="pt-2 pb-5" :align="'center'" :justify="'center'">
+      <v-row :align="'center'" :justify="'center'">
         <v-btn
           text
           to="/social-register"
@@ -108,7 +115,7 @@
           v-text="'ソーシャルアカウントで登録'"
         />
       </v-row>
-      <v-row class="mt-2 law-info-link" :align="'center'" :justify="'center'">
+      <v-row class="law-info-link" :align="'center'" :justify="'center'">
         <TitleText
           link
           small
@@ -276,8 +283,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/scss/mixins.scss";
+.login-form {
+  @include for(mobile) {
+    overflow: hidden;
+  }
+}
 .logo {
   height: 40vh;
+  @include for(tablet) {
+    height: 20vh;
+  }
 }
 .v-btn:before {
   color: #ffffff !important;
@@ -287,19 +303,6 @@ export default {
   bottom: 12px;
   left: 12px;
   width: 240px;
-}
-
-@mixin social_button($brand-color: #999, $text-color: #fff) {
-  background-color: $brand-color !important;
-  border-color: $brand-color;
-  color: $text-color;
-
-  @at-root {
-    #{&}__icon {
-      position: absolute;
-      left: 0;
-    }
-  }
 }
 
 .color-twitter {

@@ -15,30 +15,26 @@
           登録にかかる時間は数分です
         </h4>
       </v-row>
-      <v-row>
-        <v-col>
-          <v-row align="center" justify="center">
-            <v-checkbox v-model="isConfirmTermAndPolicy" />
-            <div class="ml-5">
-              <TitleText
-                link
-                small
-                @click="$router.push({ name: 'privacy-policy' })"
-                v-text="'個人情報の取り扱い'"
-              />
-              <TitleText small v-text="'と'" />
-              <br />
-              <br />
-              <TitleText
-                link
-                small
-                @click="$router.push({ name: 'terms-of-service' })"
-                v-text="'利用規約'"
-              />
-              <TitleText small v-text="'に同意する'" />
-            </div>
-          </v-row>
-        </v-col>
+      <v-row align="center" justify="center">
+        <v-checkbox v-model="isConfirmTermAndPolicy">
+          <template #label>
+            <TitleText
+              link
+              small
+              @click="$router.push({ name: 'privacy-policy' })"
+              v-text="'個人情報の取り扱い'"
+            />
+            <TitleText small v-text="'と'" />
+            <TitleText
+              link
+              small
+              @click="$router.push({ name: 'terms-of-service' })"
+              v-text="'利用規約'"
+            />
+            <TitleText small v-text="'に同意する'" />
+
+          </template>
+        </v-checkbox>
       </v-row>
       <v-form ref="form">
         <v-row>
