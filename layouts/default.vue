@@ -566,7 +566,6 @@ html {
 }
 </style>
 <style scoped lang="scss">
-@import "~/assets/scss/mixins.scss";
 .v-bottom-navigation span,
 .v-bottom-navigation i {
   color: #ffffff !important;
@@ -584,11 +583,8 @@ html {
 }
 .app-bar-notification-wrapper {
   position: fixed;
-  right: 44px;
+  right: 50px;
   top: 4px;
-  @include for(mobile) {
-    right: 50px;
-  }
 }
 .app-bar-notification-badge {
   margin-top: 12px;
