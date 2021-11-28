@@ -1,6 +1,12 @@
 <template>
   <v-app v-show="isLoaded">
-    <v-app-bar flat class="app-bar" :clipped-left="clipped" fixed app>
+    <v-app-bar
+      flat
+      class="app-bar"
+      :clipped-left="clipped"
+      fixed
+      app
+    >
       <v-spacer />
       <v-toolbar-title
         class="app-title"
@@ -9,7 +15,7 @@
       />
       <v-spacer />
       <v-btn
-        class="app-bar-menu-button"
+        class="app-bar-menu-button mr-1"
         icon
         @click.stop="rightDrawer = !rightDrawer"
       >

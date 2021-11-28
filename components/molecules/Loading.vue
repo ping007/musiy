@@ -29,11 +29,11 @@ export default {
   },
   props: {
     value: {
-      type: Number,
+      type: [Number, String],
       required: true,
     },
     zindex: {
-      type: Number,
+      type: [Number, String],
       required: false,
       default: 1000
     }
@@ -41,7 +41,7 @@ export default {
   computed: {
     Zindex() {
       return {
-        "--z-index": this.zindex
+        "--z-index": Number(this.zindex)
       };
     },
   }

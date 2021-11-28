@@ -2,10 +2,10 @@
   <div>
     <Loading v-model="loadingValue" />
     <v-container fluid>
-      <v-row class="pt-5 pb-10 logo" align="center" justify="center">
+      <v-row class="pt-5 logo" :class="isMobileDevice ? 'pb-4' : 'pb-10'" align="center" justify="center">
         <v-img src="/images/logo_icon.png" max-width="180" />
       </v-row>
-      <v-row class="pt-5 px-8" align="center" justify="center">
+      <v-row v-if="!isMobileDevice" class="pt-5 px-8" align="center" justify="center">
         <h1 class="msy-color-text-red default-font-family">
           さあMusiyへ登録しましょう！
         </h1>

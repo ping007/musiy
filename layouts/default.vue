@@ -10,183 +10,189 @@
       app
       color="#2d2d2d"
     >
-      <router-link to="/fans/main" class="app-bar-link">
-        <img class="app-bar-logo-img" :src="appBarLogo" />
-      </router-link>
-      <div v-show="isDetail && isScroll" id="avater" class="block-center">
-        <v-avatar class="artist-avater" size="36">
-          <img
-            v-if="$store.state.artistImageUrl.indexOf('images') > 0"
-            class="artist-avater-image"
-            :src="$store.state.artistImageUrl"
-          />
-          <img
-            v-else
-            :src="'/images/no_image.png'"
-            class="no-profile-image"
-            alt="artist no image"
-          />
-        </v-avatar>
-        <p class="mb-0 ml-2">{{ $store.state.artistName }}</p>
-      </div>
-      <div class="app-bar-notification-wrapper">
-        <v-menu
-          :content-class="'app-bar-notification-list-wrapper'"
-          bottom
-          left
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-badge
-              v-model="hasNewNotifications"
-              class="app-bar-notification-badge"
-              color="rgb(231, 64, 89)"
-              :content="newNotificationsCount"
-              overlap
+      <v-row>
+        <v-col>
+          <router-link to="/fans/main" class="app-bar-link">
+            <img class="app-bar-logo-img" :src="appBarLogo" />
+          </router-link>
+        </v-col>
+        <v-col>
+          <div v-show="isDetail && isScroll" id="avater" class="block-center">
+            <v-avatar class="artist-avater" size="36">
+              <img
+                v-if="$store.state.artistImageUrl.indexOf('images') > 0"
+                class="artist-avater-image"
+                :src="$store.state.artistImageUrl"
+              />
+              <img
+                v-else
+                :src="'/images/no_image.png'"
+                class="no-profile-image"
+                alt="artist no image"
+              />
+            </v-avatar>
+            <p class="mb-0 ml-2">{{ $store.state.artistName }}</p>
+          </div>
+          <div class="app-bar-notification-wrapper">
+            <v-menu
+              :content-class="'app-bar-notification-list-wrapper'"
+              bottom
+              left
             >
+              <template v-slot:activator="{ on, attrs }">
+                <v-badge
+                  v-model="hasNewNotifications"
+                  class="app-bar-notification-badge"
+                  color="rgb(231, 64, 89)"
+                  :content="newNotificationsCount"
+                  overlap
+                >
+                  <v-btn
+                    class="app-bar-notification-button"
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon :color="appBarNotification">mdi-bell</v-icon>
+                  </v-btn>
+                </v-badge>
+              </template>
+              <v-list class="notifications-list">
+                <div
+                  v-for="(notification, i) in notifications"
+                  :key="notification.notificationId"
+                >
+                  <v-list-item
+                    class="notifications-list-item"
+                    @click="onClickNotification(notification)"
+                  >
+                    <v-badge
+                      bordered
+                      left
+                      dot
+                      overlap
+                      color="rgb(231, 64, 89)"
+                      :value="notification.isConfirmed === false"
+                    >
+                      <div class="block-center">
+                        <div>
+                          <v-avatar class="artist-avater" size="36">
+                            <v-img
+                              v-if="hasArtistImageId(notification)"
+                              :src="getArtistImageUrl(notification)"
+                              class="artist-avater-image"
+                            />
+                            <v-img
+                              v-else
+                              :src="'/images/no_image.png'"
+                              class="no-profile-image"
+                              alt="artist no image"
+                            />
+                          </v-avatar>
+                        </div>
+                        <div class="mx-4 app-bar-notification-message">
+                          {{ notification.message }}
+                        </div>
+                        <div>
+                          <v-img
+                            v-if="hasThumbnail(notification)"
+                            contain
+                            max-width="60px"
+                            :src="getThumbnailUrl(notification)"
+                          />
+                          <v-icon
+                            v-else
+                            color="rgb(231, 64, 89)"
+                            class="mx-3"
+                            size="36px"
+                          >
+                            {{ getIcon(notification.notificationType) }}
+                          </v-icon>
+                        </div>
+                      </div>
+                    </v-badge>
+                  </v-list-item>
+                  <v-divider v-if="i < notifications.length - 1" />
+                </div>
+              </v-list>
+            </v-menu>
+          </div>
+          <v-dialog v-model="menuDialog">
+            <template v-slot:activator="{ on }">
+              <v-spacer />
               <v-btn
-                class="app-bar-notification-button"
+                class="app-bar-search-button"
+                :style="appBarSearch"
                 icon
-                v-bind="attrs"
                 v-on="on"
               >
-                <v-icon :color="appBarNotification">mdi-bell</v-icon>
+                <v-icon color="#ffffff">mdi-magnify</v-icon>
               </v-btn>
-            </v-badge>
-          </template>
-          <v-list class="notifications-list">
-            <div
-              v-for="(notification, i) in notifications"
-              :key="notification.notificationId"
-            >
-              <v-list-item
-                class="notifications-list-item"
-                @click="onClickNotification(notification)"
-              >
-                <v-badge
-                  bordered
-                  left
-                  dot
-                  overlap
-                  color="rgb(231, 64, 89)"
-                  :value="notification.isConfirmed === false"
-                >
-                  <div class="block-center">
-                    <div>
-                      <v-avatar class="artist-avater" size="36">
-                        <v-img
-                          v-if="hasArtistImageId(notification)"
-                          :src="getArtistImageUrl(notification)"
-                          class="artist-avater-image"
-                        />
-                        <v-img
-                          v-else
-                          :src="'/images/no_image.png'"
-                          class="no-profile-image"
-                          alt="artist no image"
-                        />
-                      </v-avatar>
-                    </div>
-                    <div class="mx-4 app-bar-notification-message">
-                      {{ notification.message }}
-                    </div>
-                    <div>
-                      <v-img
-                        v-if="hasThumbnail(notification)"
-                        contain
-                        max-width="60px"
-                        :src="getThumbnailUrl(notification)"
-                      />
-                      <v-icon
-                        v-else
-                        color="rgb(231, 64, 89)"
-                        class="mx-3"
-                        size="36px"
-                      >
-                        {{ getIcon(notification.notificationType) }}
-                      </v-icon>
-                    </div>
-                  </div>
-                </v-badge>
-              </v-list-item>
-              <v-divider v-if="i < notifications.length - 1" />
-            </div>
-          </v-list>
-        </v-menu>
-      </div>
-      <v-dialog v-model="menuDialog">
-        <template v-slot:activator="{ on }">
-          <v-spacer />
-          <v-btn
-            class="app-bar-search-button"
-            :style="appBarSearch"
-            icon
-            v-on="on"
-          >
-            <v-icon color="#ffffff">mdi-magnify</v-icon>
-          </v-btn>
-        </template>
-        <v-card class="search-dialog">
-          <v-card-title class="headline grey lighten-2" primary-title>
-            Search Musics
-          </v-card-title>
-          <v-container class="px-5">
-            <v-row class="px-2">
-              <v-text-field dense outlined rounded label="フリーワード" />
-            </v-row>
-            <v-row class="px-2">
-              <v-autocomplete
-                v-model="selectedGenres"
-                :disabled="isUpdating"
-                :items="genres"
-                filled
-                chips
-                label="ジャンル選択"
-                item-text="name"
-                item-value="genreId"
-                multiple
-                dense
-                rounded
-              >
-                <template v-slot:selection="data">
-                  <v-chip
-                    v-bind="data.attrs"
-                    :input-value="data.selected"
-                    close
-                    @click="data.select"
-                    @click:close="remove(data.item)"
+            </template>
+            <v-card class="search-dialog">
+              <v-card-title class="headline grey lighten-2" primary-title>
+                Search Musics
+              </v-card-title>
+              <v-container class="px-5">
+                <v-row class="px-2">
+                  <v-text-field dense outlined rounded label="フリーワード" />
+                </v-row>
+                <v-row class="px-2">
+                  <v-autocomplete
+                    v-model="selectedGenres"
+                    :disabled="isUpdating"
+                    :items="genres"
+                    filled
+                    chips
+                    label="ジャンル選択"
+                    item-text="name"
+                    item-value="genreId"
+                    multiple
+                    dense
+                    rounded
                   >
-                    {{ data.item.name }}
-                  </v-chip>
-                </template>
-                <template v-slot:item="data">
-                  <template>
-                    <v-list-item-content>
-                      <v-list-item-title>{{
-                        data.item.name
-                      }}</v-list-item-title>
-                    </v-list-item-content>
-                  </template>
-                </template>
-              </v-autocomplete>
-            </v-row>
-            <v-row class="px-2" />
-          </v-container>
-          <v-divider />
-          <v-card-actions>
-            <v-spacer />
-            <v-btn dark class="msy-color-red" block @click="menuDialog = false">
-              検索
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-btn
-        class="app-bar-menu-button"
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <img class="app-bar-menu-img" src="/images/menu_piano.png" />
-      </v-btn>
+                    <template v-slot:selection="data">
+                      <v-chip
+                        v-bind="data.attrs"
+                        :input-value="data.selected"
+                        close
+                        @click="data.select"
+                        @click:close="remove(data.item)"
+                      >
+                        {{ data.item.name }}
+                      </v-chip>
+                    </template>
+                    <template v-slot:item="data">
+                      <template>
+                        <v-list-item-content>
+                          <v-list-item-title>{{
+                            data.item.name
+                          }}</v-list-item-title>
+                        </v-list-item-content>
+                      </template>
+                    </template>
+                  </v-autocomplete>
+                </v-row>
+                <v-row class="px-2" />
+              </v-container>
+              <v-divider />
+              <v-card-actions>
+                <v-spacer />
+                <v-btn dark class="msy-color-red" block @click="menuDialog = false">
+                  検索
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-btn
+            class="app-bar-menu-button"
+            icon
+            @click.stop="rightDrawer = !rightDrawer"
+          >
+            <img class="app-bar-menu-img" src="/images/menu_piano.png" />
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-app-bar>
     <v-content>
       <v-container id="mainContent" :key="resetKey">
@@ -559,7 +565,8 @@ html {
   touch-action: manipulation;
 }
 </style>
-<style scoped>
+<style scoped lang="scss">
+@import "~/assets/scss/mixins.scss";
 .v-bottom-navigation span,
 .v-bottom-navigation i {
   color: #ffffff !important;
@@ -579,6 +586,9 @@ html {
   position: fixed;
   right: 44px;
   top: 4px;
+  @include for(mobile) {
+    right: 50px;
+  }
 }
 .app-bar-notification-badge {
   margin-top: 12px;
