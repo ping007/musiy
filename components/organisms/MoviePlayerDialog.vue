@@ -142,10 +142,10 @@
                 <SocialShareButton
                   :url="
                     getLocationOrigin() +
-                    '/ogp?artist_id=' +
-                    movie_.userId +
-                    '&movie_id=' +
-                    movie_.movieId
+                      '/ogp?artist_id=' +
+                      movie_.userId +
+                      '&movie_id=' +
+                      movie_.movieId
                   "
                   :title="movie_.title + ' ' + movie_.artistName"
                   :description="movie_.description"

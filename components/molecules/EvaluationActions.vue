@@ -38,8 +38,8 @@
       <v-row
         v-if="
           evaluationsComments &&
-          evaluationsComments.length > 0 &&
-          showingCommentCount > 0
+            evaluationsComments.length > 0 &&
+            showingCommentCount > 0
         "
         class="fixed-row"
       >

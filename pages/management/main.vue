@@ -122,37 +122,88 @@
         >
           <span v-text="errorStr"></span>
         </v-snackbar>
-        </v-tab-item>
-        <v-tab-item value="musiy-sales-list">
-          <v-row align="left">
-            <v-col
-              class="d-flex"
-              cols="2"
-            >
-              <v-select
-                v-model="defaultYear"
-                :items="selectableYears"
-                item-text="text"
-                item-value="val"
-                return-object
-                @change="displayMusiySalesList($event.val)"
-              />
-            </v-col>
-          </v-row>
+      </v-tab-item>
+      <v-tab-item value="musiy-sales-list">
+        <v-row align="left">
+          <v-col
+            class="d-flex"
+            cols="2"
+          >
+            <v-select
+              v-model="defaultYear"
+              :items="selectableYears"
+              item-text="text"
+              item-value="val"
+              return-object
+              @change="displayMusiySalesList($event.val)"
+            />
+          </v-col>
+        </v-row>
+        <template>
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th v-for="column in salesListColumns" :key="column" class="text-left">
+                    {{ column }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="sales in musiySalesListData" :key="sales">
+                  <td>{{ sales.header }}</td>
+                  <td v-for="value in sales.val" :key="value" class="text-right">{{ value.toLocaleString() }}円</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+          <v-snackbar
+            v-model="isShowSalesListErrorSnackbar"
+            top
+            :multi-line="true"
+            :color="'error'"
+            :timeout="3000"
+          >
+            <span v-text="salesListErrorStr"></span>
+          </v-snackbar>
+        </template>
+      </v-tab-item>
+      <v-tab-item value="artists-sales-list">
+        <v-row align="left">
+          <v-col
+            class="d-flex"
+            cols="2"
+          >
+            <v-select
+              v-model="defaultYear"
+              :items="selectableYears"
+              item-text="text"
+              item-value="val"
+              return-object
+              @change="displayArtistsSalesList($event.val)"
+            />
+          </v-col>
+        </v-row>
+        <div v-for="artistSales of artistsSalesListData" :key="artistSales">
           <template>
+            <h1>{{ artistSales.artistName }}</h1>
             <v-simple-table>
               <template v-slot:default>
                 <thead>
                   <tr>
-                    <th class="text-left" v-for="column in salesListColumns" :key="column">
-                      {{column}}
+                    <th v-for="column in salesListColumns" :key="column" class="text-left">
+                      {{ column }}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="sales in musiySalesListData" :key="sales">
+                  <tr v-for="sales in artistSales.sales" :key="sales">
                     <td>{{ sales.header }}</td>
-                    <td class="text-right" v-for="value in sales.val" :key="value">{{ value.toLocaleString() }}円</td>
+                    <td v-for="value in sales.val" :key="value" class="text-right">
+                      <div v-if="value !== ''">
+                        {{ value.toLocaleString() }}円
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </template>
@@ -167,61 +218,10 @@
               <span v-text="salesListErrorStr"></span>
             </v-snackbar>
           </template>
-        </v-tab-item>
-        <v-tab-item value="artists-sales-list">
-          <v-row align="left">
-            <v-col
-              class="d-flex"
-              cols="2"
-            >
-              <v-select
-                v-model="defaultYear"
-                :items="selectableYears"
-                item-text="text"
-                item-value="val"
-                return-object
-                @change="displayArtistsSalesList($event.val)"
-              />
-            </v-col>
-          </v-row>
-          <div v-for="artistSales of artistsSalesListData" :key="artistSales">
-            <template>
-              <h1>{{artistSales.artistName}}</h1>
-              <v-simple-table>
-                <template v-slot:default>
-                  <thead>
-                    <tr>
-                      <th class="text-left" v-for="column in salesListColumns" :key="column">
-                        {{column}}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="sales in artistSales.sales" :key="sales">
-                    <td>{{ sales.header }}</td>
-                    <td class="text-right" v-for="value in sales.val" :key="value">
-                      <div v-if="value !== ''">
-                        {{ value.toLocaleString() }}円
-                      </div>
-                    </td>
-                    </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
-              <v-snackbar
-                v-model="isShowSalesListErrorSnackbar"
-                top
-                :multi-line="true"
-                :color="'error'"
-                :timeout="3000"
-              >
-                <span v-text="salesListErrorStr"></span>
-              </v-snackbar>
-            </template>
-            <br /><br /><br />
-          </div>
-        </v-tab-item>
-      </v-tabs-items>
+          <br /><br /><br />
+        </div>
+      </v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
@@ -293,6 +293,11 @@ export default {
       artistsSalesListData: [],
     };
   },
+  watch: {
+    items() {
+      this.formattedItems = this.formatAmount(this.items, "amount");
+    },
+  },
   async created() {
     if (await this.TransferAmountDao_IsMasterAccount()) {
       this.isShowPage = true;
@@ -313,11 +318,6 @@ export default {
         name: "login",
       });
     }
-  },
-  watch: {
-    items() {
-      this.formattedItems = this.formatAmount(this.items, "amount");
-    },
   },
   methods: {
     async getAllItems() {
@@ -358,19 +358,19 @@ export default {
         const musicTotalRow = {
           header: "音声販売合計",
           val: this.generateTotalSalesArrayForEachMonth(mediaForSelectedYear.filter(medium => medium.contentType === "music"), "price")
-        }
+        };
         const movieTotalRow = {
           header: "動画販売合計",
           val: this.generateTotalSalesArrayForEachMonth(mediaForSelectedYear.filter(medium => medium.contentType === "movie"), "price")
-        }
+        };
         const ticketTotalRow = {
           header: "配信チケット合計",
           val: this.generateTotalSalesArrayForEachMonth(mediaForSelectedYear.filter(medium => medium.contentType === "ticket"), "price")
-        }
+        };
         const fanClubTotalRow = {
           header: "ファンクラブ合計",
           val: this.generateTotalSalesArrayForEachMonth(mediaForSelectedYear.filter(medium => medium.contentType === "plan"), "price")
-        }
+        };
 
         const overallTotalRow = {
           header: "全体総売上",
@@ -383,11 +383,11 @@ export default {
         const profitRow = {
           header: "利益",
           val: overallTotalRow.val.map(elm => elm * 0.3)
-        }
+        };
         const transferredRow = {
           header: "振込金合計",
           val: this.generateTotalSalesArrayForEachMonth(this.items.filter(item => new Date(item.crDatetime).getFullYear() === selectedYear), "amount")
-        }
+        };
 
         this.musiySalesListData = [overallTotalRow, musicTotalRow, movieTotalRow, ticketTotalRow, fanClubTotalRow, profitRow, transferredRow];
       }
@@ -417,7 +417,7 @@ export default {
             movieIds: this.movies.filter(movie => movie.userId === artist.userId).map(movie => movie.movieId),
             broadcastIds: this.broadcasts.filter(broadcast => broadcast.userId === artist.userId).map(broadcast => broadcast.broadcastId),
             planIds: this.plans.filter(plan => plan.userId === artist.userId).map(plan => plan.planId)
-          }
+          };
         });
 
         const mediaForSelectedYear = this.media.filter(content => new Date(content.crDatetime).getFullYear() === selectedYear);
@@ -441,7 +441,7 @@ export default {
             header: "ファンクラブ合計",
             val: this.generateTotalSalesArrayForEachMonth(mediaForSelectedYear
               .filter(medium => medium.contentType === "plan" && mediaByArtists[artist.userId].planIds.includes(medium.contentId)), "price")
-            };
+          };
 
           const overallTotalRow = {
             header: "全体総売上",
@@ -462,7 +462,7 @@ export default {
           const transferredRow = {
             header: "振込金合計",
             val: this.generateTotalSalesArrayForEachMonth(
-            this.items.filter(item => new Date(item.crDatetime).getFullYear() === selectedYear && item.transferUserId === artist.userId), "amount")
+              this.items.filter(item => new Date(item.crDatetime).getFullYear() === selectedYear && item.transferUserId === artist.userId), "amount")
           };
           const autoTransferredRow = {
             header: "次月末自動振込金額",
@@ -476,7 +476,7 @@ export default {
             artistName: artist.username,
             sales: [overallTotalRow, musicTotalRow, movieTotalRow, ticketTotalRow, fanClubTotalRow, profitRow, artistSales, transferredRow, remainingBalanceRow, autoTransferredRow]
           });
-        })
+        });
       }
     },
     generateAutoTransferred(artist, mediaByArtists, selectedYear, transferredForThisYear, artistSalesForSelectedYear) {
@@ -505,7 +505,7 @@ export default {
           return 0;
         }
         return totalSalesForTheMonthBeforeLast - transferredForPastThreeMonth;
-      }
+      };
       for (let month = 1; month <= 12; month++) {
         let [totalSalesForTheMonthBeforeLast, transferredForPastThreeMonth] = [0, 0];
         const shouldBeCarriedFromPrevYear = month <= 2;
@@ -586,7 +586,7 @@ export default {
       return totalSalesArray;
     },
     generateTotalSales(contents, month, priceColumnName) {
-      const contentsForTargetMonth = contents.filter(content => (new Date(content.crDatetime).getMonth() + 1) === month)
+      const contentsForTargetMonth = contents.filter(content => (new Date(content.crDatetime).getMonth() + 1) === month);
       if (contentsForTargetMonth.length === 0) {
         return 0;
       }

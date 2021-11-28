@@ -65,10 +65,10 @@
               <SocialShareButton
                 :url="
                   getLocationOrigin() +
-                  '/ogp?artist_id=' +
-                  feed_.userId +
-                  '&feed_id=' +
-                  feed_.feedId
+                    '/ogp?artist_id=' +
+                    feed_.userId +
+                    '&feed_id=' +
+                    feed_.feedId
                 "
                 :title="feed_.title"
               />
@@ -139,16 +139,14 @@
                       class="mr-2"
                       large
                       @click="setIsLiked(feed_, index)"
-                      >mdi-heart</v-icon
-                    >
+                    >mdi-heart</v-icon>
                     <v-icon
                       v-else
                       :color="'msy-color-text-blue-gray'"
                       class="mr-2"
                       large
                       @click="setIsLiked(feed_, index)"
-                      >mdi-heart-outline</v-icon
-                    >
+                    >mdi-heart-outline</v-icon>
                   </v-btn>
                   <span
                     :class="
@@ -186,7 +184,7 @@
           <v-row
             v-else-if="
               parseInt(feed_.allowType) ===
-              contentAllowType.FollowersOrSupporters
+                contentAllowType.FollowersOrSupporters
             "
             v-show="feed_.isShow"
             :key="feed_.feedId"
@@ -248,7 +246,7 @@
           <v-row
             v-else-if="
               parseInt(feed_.allowType) === contentAllowType.Supporters &&
-              !judgeAllowedFeed(feed_)
+                !judgeAllowedFeed(feed_)
             "
             v-show="feed_.isShow"
             :key="feed_.feedId"
@@ -283,10 +281,10 @@
                   class="msy-color-text-red"
                   v-text="
                     '応援プラン：' +
-                    feed_.planName +
-                    '(' +
-                    feed_.planPrice +
-                    'P)以上限定'
+                      feed_.planName +
+                      '(' +
+                      feed_.planPrice +
+                      'P)以上限定'
                   "
                 ></span>
               </v-row>

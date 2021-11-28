@@ -150,9 +150,9 @@ export default {
     errorCodeConverter(errorCode, errorMessage) {
       let message = "";
       switch (errorCode) {
-        case "invalid-argument":
-          message = "入力内容に不備があります。内容を確認してください。";
-          break;
+      case "invalid-argument":
+        message = "入力内容に不備があります。内容を確認してください。";
+        break;
       }
       return message;
     },

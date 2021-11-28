@@ -22,7 +22,7 @@
           <div
             v-else-if="
               parseInt(movie.allowType) ===
-              contentAllowType.FollowersOrSupporters
+                contentAllowType.FollowersOrSupporters
             "
           >
             <v-card
@@ -83,7 +83,7 @@
           <div
             v-else-if="
               parseInt(movie.allowType) === contentAllowType.Supporters &&
-              !judgeAllowedMovie(movie)
+                !judgeAllowedMovie(movie)
             "
           >
             <v-card
@@ -118,10 +118,10 @@
                     class="msy-color-text-red"
                     v-text="
                       '応援プラン：' +
-                      movie.planName +
-                      '(' +
-                      movie.planPrice +
-                      'P)以上限定'
+                        movie.planName +
+                        '(' +
+                        movie.planPrice +
+                        'P)以上限定'
                     "
                   ></span>
                 </v-row>
