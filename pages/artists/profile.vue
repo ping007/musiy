@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="artists-profile" :fluid="true">
+    <v-container class="artists-profile" fluid>
       <v-row class="py-5">
         <UploadImageFile
           :image-id="user.imageId"

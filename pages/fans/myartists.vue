@@ -1,5 +1,5 @@
 <template>
-  <v-container class="myartists pa-0" :fluid="true">
+  <v-container class="myartists pa-0" fluid>
     <v-row class="mx-0 px-0 title" justify="center" align="center">
       <v-col cols="12" class="block-center">
         <v-icon class="mr-2 msy-color-text-red"> mdi-heart </v-icon>

@@ -1,0 +1,47 @@
+$mobile: 600px;
+$tablet: 960px;
+$laptop: 1264px;
+$desktop: 1920px;
+
+//@include for(mobile){}
+//@include for(tablet){}
+//@include for(laptop){}
+//@include for(desktop){}
+@mixin for($media) {
+  @if $media==mobile {
+    @media only screen and (max-width: ($mobile - 1)) {
+      @content;
+    }
+  }
+
+  @else if $media==tablet {
+    @media only screen and (max-width: ($tablet - 1)) {
+      @content;
+    }
+  }
+
+  @else if $media==laptop {
+    @media only screen and (max-width: ($laptop - 1)) {
+      @content;
+    }
+  }
+
+  @else {
+    @media only screen and (max-width: $desktop) {
+      @content;
+    }
+  }
+}
+
+@mixin social_button($brand-color: #999, $text-color: #fff) {
+  background-color: $brand-color !important;
+  border-color: $brand-color;
+  color: $text-color;
+
+  @at-root {
+    #{&}__icon {
+      position: absolute;
+      left: 0;
+    }
+  }
+}

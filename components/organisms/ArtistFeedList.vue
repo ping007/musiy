@@ -33,10 +33,10 @@
               <SocialShareButton
                 :url="
                   getLocationOrigin() +
-                  '/ogp?artist_id=' +
-                  feed.userId +
-                  '&feed_id=' +
-                  feed.feedId
+                    '/ogp?artist_id=' +
+                    feed.userId +
+                    '&feed_id=' +
+                    feed.feedId
                 "
                 :title="feed.title"
               />
@@ -150,7 +150,7 @@
           <v-card
             v-else-if="
               parseInt(feed.allowType) ===
-              contentAllowType.FollowersOrSupporters
+                contentAllowType.FollowersOrSupporters
             "
             min-height="320"
             min-width="90vw"
@@ -212,7 +212,7 @@
           <v-card
             v-else-if="
               parseInt(feed.allowType) === contentAllowType.Supporters &&
-              !judgeAllowedFeed(feed)
+                !judgeAllowedFeed(feed)
             "
             min-height="320"
             min-width="90vw"
@@ -247,10 +247,10 @@
                   class="msy-color-text-red"
                   v-text="
                     '応援プラン：' +
-                    feed.planName +
-                    '(' +
-                    feed.planPrice +
-                    'P)以上限定'
+                      feed.planName +
+                      '(' +
+                      feed.planPrice +
+                      'P)以上限定'
                   "
                 ></span>
               </v-row>

@@ -2,7 +2,7 @@
   <v-container
     v-touch:swipe.right="()=>{if (!this.$ua.isFromPc()) backToMain()}"
     pa-0
-    :fluid="true"
+    fluid
   >
     <v-row v-if="$ua.isFromPc()" class="my-4">
       <v-btn @click="backToMain">

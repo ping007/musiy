@@ -83,7 +83,7 @@
         <v-col
           v-else-if="
             parseInt(broadcast.allowType) ===
-            contentAllowType.FollowersOrSupporters
+              contentAllowType.FollowersOrSupporters
           "
         >
           <v-row class="bold" align="center" justify="center">
@@ -139,7 +139,7 @@
         <v-col
           v-else-if="
             parseInt(broadcast.allowType) === contentAllowType.Supporters &&
-            !judgeAllowedBroadcast(broadcast)
+              !judgeAllowedBroadcast(broadcast)
           "
         >
           <v-row class="bold" align="center" justify="center">
@@ -174,10 +174,10 @@
               class="msy-color-text-red"
               v-text="
                 '応援プラン：' +
-                broadcast.planName +
-                '(' +
-                broadcast.planPrice +
-                'P)以上限定'
+                  broadcast.planName +
+                  '(' +
+                  broadcast.planPrice +
+                  'P)以上限定'
               "
             ></span>
           </v-row>
@@ -320,21 +320,21 @@ export default {
       const status = this.getStatus(broadcast);
       let statusStr = "";
       switch (status) {
-        case 0:
-          statusStr = "配信前";
-          break;
-        case 1:
-          statusStr = "配信中";
-          break;
-        case 2:
-          statusStr = "配信済";
-          break;
-        case 3:
-          statusStr = "視聴済";
-          break;
-        case 4:
-          statusStr = "中止";
-          break;
+      case 0:
+        statusStr = "配信前";
+        break;
+      case 1:
+        statusStr = "配信中";
+        break;
+      case 2:
+        statusStr = "配信済";
+        break;
+      case 3:
+        statusStr = "視聴済";
+        break;
+      case 4:
+        statusStr = "中止";
+        break;
       }
       return statusStr;
     },

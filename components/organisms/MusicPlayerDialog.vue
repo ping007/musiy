@@ -146,10 +146,10 @@
                 <SocialShareButton
                   :url="
                     getLocationOrigin() +
-                    '/ogp?artist_id=' +
-                    music_.userId +
-                    '&music_id=' +
-                    music_.musicId
+                      '/ogp?artist_id=' +
+                      music_.userId +
+                      '&music_id=' +
+                      music_.musicId
                   "
                   :title="music_.title + ' ' + music_.artistName"
                   :description="music_.description"

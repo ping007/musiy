@@ -15,10 +15,10 @@
           class="msy-color-text-red warn-text"
           v-text="
             '応援プラン：' +
-            music.planName +
-            '(' +
-            music.planPrice +
-            'P)以上限定'
+              music.planName +
+              '(' +
+              music.planPrice +
+              'P)以上限定'
           "
         ></span>
       </v-row>

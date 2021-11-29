@@ -64,7 +64,7 @@
           <div
             v-else-if="
               parseInt(music.allowType) ===
-              contentAllowType.FollowersOrSupporters
+                contentAllowType.FollowersOrSupporters
             "
             class="music-card"
           >
@@ -101,7 +101,7 @@
           <div
             v-else-if="
               parseInt(music.allowType) === contentAllowType.Supporters &&
-              !judgeAllowedMusic(music)
+                !judgeAllowedMusic(music)
             "
             class="music-card"
           >

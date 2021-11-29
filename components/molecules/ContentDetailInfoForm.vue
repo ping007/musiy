@@ -297,7 +297,7 @@ export default {
     genre_: {
       handler(newValue, oldVal) {
         this.genre_ = newValue;
-//        this.$emit("update:music-details", this.genre_);
+        //        this.$emit("update:music-details", this.genre_);
         this.$emit("update:genre", this.genre_);
       },
       deep: true,

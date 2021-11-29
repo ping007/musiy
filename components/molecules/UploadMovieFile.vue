@@ -32,8 +32,7 @@
           large
           color="red"
           @click="deleteMovie()"
-          >mdi-close-circle</v-icon
-        >
+        >mdi-close-circle</v-icon>
       </v-row>
       <v-row v-show="!uploadEnd && !uploading" align="center" justify="center">
         <span>↓大容量ファイル（500MBまで）はこちら</span>
@@ -61,8 +60,7 @@
           :rotate="360"
           :value="progressUpload"
           color="rgb(231, 64, 89)"
-          >{{ progressUpload }}%</v-progress-circular
-        >
+        >{{ progressUpload }}%</v-progress-circular>
       </v-row>
     </v-container>
     <v-snackbar

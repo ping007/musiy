@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mymusics" :fluid="true">
+  <v-container class="mymusics" fluid>
     <v-tabs color="rgb(231, 64, 89)" fixed-tabs>
       <v-tab :key="'mymusic'" :href="`#tab-mymusic`">
         <span class="tab-title" v-text="'購入済み'"></span>

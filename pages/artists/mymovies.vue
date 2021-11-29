@@ -1,5 +1,5 @@
 <template>
-  <v-container pa-0 :fluid="true">
+  <v-container pa-0 fluid>
     <v-row class="mx-2 title">
       <span v-text="'My Movies'"></span>
     </v-row>
