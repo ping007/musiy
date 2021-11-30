@@ -22,7 +22,7 @@
         <v-icon> mdi-menu </v-icon>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-content :class="!isUserLoggedIn && 'parent-content'">
       <v-container id="mainContent">
         <nuxt />
       </v-container>
@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -98,6 +100,9 @@ export default {
       isUpdating: false,
       activeBtn: 0,
     };
+  },
+  computed: {
+    ...mapGetters("user", ["isUserLoggedIn"])
   },
   watch: {
     isUpdating(val) {
@@ -197,6 +202,9 @@ html {
 }
 </style>
 <style scoped>
+.parent-content {
+  align-items: center;
+}
 .app-bar {
   background-color: #ffffff !important;
 }

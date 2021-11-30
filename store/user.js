@@ -7,3 +7,6 @@ export const mutations = {
     state.user = user;
   }
 };
+export const getters = {
+  isUserLoggedIn: state => !!state.user
+};
