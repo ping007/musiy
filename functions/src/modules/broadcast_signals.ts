@@ -20,6 +20,7 @@ export const broadcast_signal_pause = functions
         });
         res.status(200).send("OK");
       } catch (err) {
+        functions.logger.log('broadcast_signal_pause error: ', err);
         res.status(500).send(err);
       }
     });

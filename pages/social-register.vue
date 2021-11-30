@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="register-container">
     <Loading v-model="loadingValue" />
     <v-container fluid>
       <v-row class="pt-5 logo" :class="isMobileDevice ? 'pb-4' : 'pb-10'" align="center" justify="center">
@@ -10,7 +10,7 @@
           さあMusiyへ登録しましょう！
         </h1>
       </v-row>
-      <v-row class="pb-10 px-8" align="center" justify="center">
+      <v-row class="pb-2 pb-md-10 px-8" align="center" justify="center">
         <h4 class="msy-color-text-red default-font-family">
           登録にかかる時間は数分です
         </h4>
@@ -37,7 +37,7 @@
       </v-row>
       <v-form ref="form">
         <v-row>
-          <v-col>
+          <v-col class="py-0 py-md-1">
             <v-text-field
               v-model="username"
               type="text"
@@ -47,7 +47,7 @@
           </v-col>
         </v-row>
       </v-form>
-      <v-row class="py-5">
+      <v-row class="py-md-5">
         <v-col class="text-center">
           <v-btn
             block
@@ -188,4 +188,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/scss/mixins.scss";
+.register-container {
+  @include for(mobile) {
+    max-height: 100vh;
+    overflow: hidden;
+  }
+}
 </style>

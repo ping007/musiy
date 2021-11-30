@@ -194,7 +194,7 @@
         </v-col>
       </v-row>
     </v-app-bar>
-    <v-content>
+    <v-content :class="!isUserLoggedIn && 'parent-content'">
       <v-container id="mainContent" :key="resetKey">
         <nuxt />
       </v-container>
@@ -308,6 +308,7 @@
 
 <script>
 /* eslint-disable indent */
+import { mapGetters } from "vuex";
 import { Cloudinary } from "~/constant";
 import ArtistRegisterDialog from "~/components/organisms/ArtistRegisterDialog";
 import NotificationsDao from "~/mixins/dao/NotificationsDao";
@@ -344,6 +345,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("user", ["isUserLoggedIn"]),
     hasNewNotifications() {
       return this.newNotificationsCount > 0;
     },
@@ -566,6 +568,9 @@ html {
 }
 </style>
 <style scoped lang="scss">
+.parent-content {
+  align-items: center;
+}
 .v-bottom-navigation span,
 .v-bottom-navigation i {
   color: #ffffff !important;

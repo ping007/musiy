@@ -49,8 +49,8 @@ const hlsTranscodeSetting = (archiveDestinationId) => {
         bps: 192/* [kbps] */ * 1000// [bps]
       },
       video: {
-        width: 640,
-        height: 480,
+        width: 1920,
+        height: 1080,
         fps: 30,
         bps: 2/* [Mbps] */ * 1000 * 1000// [bps]
       },
@@ -58,8 +58,8 @@ const hlsTranscodeSetting = (archiveDestinationId) => {
         archive_destination_id: archiveDestinationId
       }
     }],
-    encrypt_key_uri: "https://asia-northeast1-musiy-dev.cloudfunctions.net/imageflux_hls_member_authentication",
-    event_webhook_url: "https://asia-northeast1-musiy-dev.cloudfunctions.net/imageflux_event_webhook"
+    encrypt_key_uri: `https://asia-northeast1-${config.projectId}.cloudfunctions.net/imageflux_hls_member_authentication`,
+    event_webhook_url: `https://asia-northeast1-${config.projectId}.cloudfunctions.net/imageflux_event_webhook`
   };
 };
 
@@ -68,7 +68,7 @@ const request = (soraTarget, data) => {
     headers: {
       "Content-Type": "application/json",
       "X-Sora-Target": soraTarget,
-      Authorization: `Bearer ${config.accessToken}`
+      Authorization: `Bearer ${config.imageFluxAccessToken}`
     }
   });
 };
