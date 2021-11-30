@@ -18,6 +18,7 @@ export const broadcast_channel_member_remove = functions
         await query.delete();
         res.status(200).send("OK");
       } catch (err) {
+        functions.logger.log('broadcast_channel_member_remove error: ', err);
         res.status(500).send(err);
       }
     });

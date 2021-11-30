@@ -81,8 +81,8 @@ export default {
       this.localStream = await navigator.mediaDevices.getUserMedia({
         video: {
           deviceId: this.cameraDevice.deviceId,
-          width: 640,
-          height: 480,
+          width: 1920,
+          height: 1080,
           frameRate: this.frameRate,
         },
       });

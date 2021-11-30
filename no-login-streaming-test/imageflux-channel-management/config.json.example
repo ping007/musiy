@@ -1,5 +1,6 @@
 {
-  "accessToken": "",
+  "projectId": "musiy-develop",
+  "imageFluxAccessToken": "",
   "archive": {
     "enable": false,
     "gcs": {

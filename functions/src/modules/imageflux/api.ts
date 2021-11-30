@@ -1,12 +1,12 @@
 import * as functions from "firebase-functions";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
 import cors from "../common/cors";
 ​
 // const archiveStorageInformation = () => {
 //   return functions.config().imageflux.archive.gcs;
 // };
 ​
-const hlsTranscodeSetting = (archiveDestinationId) => {
+const hlsTranscodeSetting = (archiveDestinationId: string) => {
   const projectId = functions.config().musiy.project_id;
   return {
     hls: [{
@@ -16,8 +16,8 @@ const hlsTranscodeSetting = (archiveDestinationId) => {
         bps: 192/* [kbps] */ * 1000
       },
       video: {
-        width: 640,
-        height: 480,
+        width: 1920,
+        height: 1080,
         fps: 30,
         bps: 2/* [Mbps] */ * 1000 * 1000
       },
@@ -58,7 +58,8 @@ export const imageflux_create_channel = functions
       const res2: AxiosResponse<any> = await request("ImageFlux_20180905.CreateChannel", hlsTranscodeSetting(archiveDestinationId));
       return res2.data;
     } catch(err) {
-      return err.response;
+      functions.logger.log('imageflux_create_channel error: ', err);
+      return (err as AxiosError<any>).response;
     }
   });
 ​
@@ -70,7 +71,8 @@ export const imageflux_delete_channel = functions
       const res: AxiosResponse<any> = await request("ImageFlux_20180501.DeleteChannel", data);
       return res.data;
     } catch(err) {
-      return err.response;
+      functions.logger.log('imageflux_delete_channel error: ', err);
+      return (err as AxiosError<any>).response;
     }
   });
 ​
@@ -88,7 +90,7 @@ export const imageflux_hls_member_authentication = functions
         res.status(200).send(new Buffer(getEncryptKeyRes.data.encrypt_key, "hex"));
       } catch(err) {
         functions.logger.log('imageflux_hls_member_authentication error: ', err);
-        res.status(500).send(err.response);
+        res.status(500).send((err as AxiosError<any>).response);
       }
     });
   });
@@ -122,6 +124,7 @@ export const imageflux_event_webhook = functions
       const actionResult: string = action(body);
       res.status(200).send(actionResult);
     } catch(err) {
-      res.status(500).send("an error has occurred");
+      functions.logger.log('imageflux_event_webhook error: ', err);
+      res.status(500).send((err as AxiosError<any>).response);
     }
   });
